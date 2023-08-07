@@ -1,3 +1,4 @@
 # l4d2_vomit_fix
-- 目前仅支持Linux使用
 - smx置于plugins文件夹内,txt置于gamedata文件夹内
+- vomit_fix修复非30tick对抗模式下boomer喷吐距离问题
+- a2s_fix即a2s_patch的插件实现,仅使用steam_bypass功能时可选使用

@@ -2,16 +2,28 @@
 {
     "left4dead2"
     {
+		"Addresses"
+		{
+			"a2s_fix_w"
+			{
+				"windows"
+				{
+					"signature"	"a2s_fix_w"
+					"offset"	"3826"
+				}
+			}
+		}
 		"Signatures"
 		{
-			"a2s_fix_l"
-			{
-				"library"	"engine"
-				"linux"		"\xE8****\x84\xC0\x89\xC7\x0F***\x00\x00\x8B\xB5"
-			}
 			"a2s_fix_w"
 			{
 				"library"	"engine"
+				"windows"	"*******************\x8B\x45\x08\x53\x56\x89\x8d"
+			}
+			"a2s_fix"
+			{
+				"library"	"engine"
+				"linux"		"\xE8****\x84\xC0\x89\xC7\x0F***\x00\x00\x8B\xB5"
 				"windows"	"\xE8****\x84\xC0\x74*8B\x16\x8B\x42\x6C"
 			}
 		}

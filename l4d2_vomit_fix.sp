@@ -3,7 +3,7 @@
 public Plugin myinfo = {
 	name = "[L4D2] vomit fix",
 	author = "lakwsh",
-	version = "1.0.0"
+	version = "1.0.1"
 }
 
 public void Patch(Address ptr, bool isWin){
@@ -17,13 +17,13 @@ public void Patch(Address ptr, bool isWin){
 public void OnPluginStart(){
 	GameData hGameData = new GameData("l4d2_vomit_fix");
 	if(!hGameData) SetFailState("Failed to load 'l4d2_vomit_fix.txt' gamedata.");
-	Address ptr = hGameData.GetMemSig("vomit_fix_l");
+	Address ptr = hGameData.GetMemSig("vomit_fix");
 	bool isWin = !ptr;
-	if(isWin) ptr = hGameData.GetMemSig("vomit_fix_w");
+	if(isWin) ptr = hGameData.GetAddress("vomit_fix_1");
 	if(!ptr) SetFailState("'vomit_fix' Signature broken.");
 	Patch(ptr, isWin);
 	if(isWin){
-		ptr = hGameData.GetMemSig("vomit_fix_w");
+		ptr = hGameData.GetAddress("vomit_fix_2");
 		if(!ptr) SetFailState("'vomit_fix'(win) Signature broken.");
 		Patch(ptr, isWin);
 	}
