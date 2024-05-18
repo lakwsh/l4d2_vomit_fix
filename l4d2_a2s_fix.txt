@@ -9,7 +9,7 @@
 				"windows"
 				{
 					"signature"	"a2s_fix_w"
-					"offset"	"3826"
+					"offset"	"3830"
 				}
 			}
 		}
