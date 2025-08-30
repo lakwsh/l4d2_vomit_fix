@@ -4,7 +4,7 @@
     {
 		"Addresses"
 		{
-			"vomit_fix"
+			"patch1"
 			{
 				"linux"
 				{
@@ -17,17 +17,25 @@
 					"offset"	"886"
 				}
 			}
+			"patch2"
+			{
+				"windows"
+				{
+					"signature"	"vomit_fix"
+					"offset"	"1347"
+				}
+			}
 			"frametime"
 			{
 				"linux"
 				{
 					"signature"	"vomit_fix"
-					"offset"	"264" // 280 - 16
+					"offset"	"-20"
 				}
 				"windows"
 				{
 					"signature"	"vomit_fix"
-					"offset"	"-20" // -4 - 16
+					"offset"	"-20"
 				}
 			}
 		}

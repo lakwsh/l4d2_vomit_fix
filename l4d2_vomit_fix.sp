@@ -3,7 +3,7 @@
 public Plugin myinfo = {
     name = "[L4D2] vomit fix",
     author = "lakwsh",
-    version = "1.1.0"
+    version = "1.1.1"
 };
 
 public void Patch(Address func, Address time) {
@@ -15,9 +15,11 @@ public void Patch(Address func, Address time) {
 public void OnPluginStart() {
     GameData hGameData = new GameData("l4d2_vomit_fix");
     if(!hGameData) SetFailState("Failed to load 'l4d2_vomit_fix.txt' gamedata.");
-    Address func = hGameData.GetAddress("vomit_fix");
+    Address patch1 = hGameData.GetAddress("patch1");
+    Address patch2 = hGameData.GetAddress("patch2");
     Address time = hGameData.GetAddress("frametime");
     CloseHandle(hGameData);
-    if(!func) SetFailState("'vomit_fix' Signature broken.");
-    Patch(func, time);
+    if(!patch1) SetFailState("'vomit_fix' Signature broken.");
+    Patch(patch1, time);
+    if(patch2) Patch(patch2, time);
 }
