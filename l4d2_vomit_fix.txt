@@ -4,21 +4,25 @@
 	{
 		"Offsets"
 		{
-			"OS"
-			{
-				"linux"		"0"
-				"windows"	"1"
-			}
-
 			"vomit_fix"
 			{
-				"linux"		"0"
-				"windows"	"6"
+				"linux"		"5"
+				"windows"	"11"
+			}
+
+			"vomit_fix_1"
+			{
+				"windows"	"74"
 			}
 
 			"vomit_fix1"
 			{
-				"windows"	"6"
+				"windows"	"11"
+			}
+
+			"vomit_fix1_1"
+			{
+				"windows"	"70"
 			}
 		}
 

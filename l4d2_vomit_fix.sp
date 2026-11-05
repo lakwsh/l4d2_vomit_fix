@@ -9,7 +9,7 @@ public Plugin myinfo =
 	name = "[L4D2] vomit fix",
 	author = "lakwsh, xiaolinRM",
 	description = "Fixes abnormal Boomer vomit range at server tick rates other than 30.",
-	version = "1.2.0",
+	version = "1.2.1",
 	url = "https://github.com/lakwsh/l4d2_vomit_fix"
 };
 
@@ -17,7 +17,9 @@ bool g_bEnabled;
 Address g_iAddress;
 Address g_iAddress1;
 int g_iOffset;
+int g_iOffset_1;
 int g_iOffset1;
+int g_iOffset1_1;
 any g_iValue;
 
 ConVar z_vomit_drag;
@@ -35,18 +37,14 @@ public void OnPluginStart()
 	g_iOffset = hGameData.GetOffset("vomit_fix");
 	if (g_iOffset == -1) SetFailState("Failed to load 'vomit_fix' offset.");
 	g_iValue = LoadFromAddress(g_iAddress + view_as<Address>(1), NumberType_Int32);
-
-	if (hGameData.GetOffset("OS") == 1)
-	{
-		g_iAddress1 = hGameData.GetMemSig("vomit_fix1");
-		if (!g_iAddress1) SetFailState("Failed to load 'vomit_fix1' signature.");
-		g_iOffset1 = hGameData.GetOffset("vomit_fix1");
-		if (g_iOffset1 == -1) SetFailState("Failed to load 'vomit_fix1' offset.");
-	}
+	g_iOffset_1 = hGameData.GetOffset("vomit_fix_1");
+	g_iAddress1 = hGameData.GetMemSig("vomit_fix1");
+	g_iOffset1 = hGameData.GetOffset("vomit_fix1");
+	g_iOffset1_1 = hGameData.GetOffset("vomit_fix1_1");
 	delete hGameData;
 
-	EnablePatch(g_iAddress, g_iOffset);
-	if (g_iAddress1) EnablePatch(g_iAddress1, g_iOffset1);
+	EnablePatch(g_iAddress, g_iOffset, g_iOffset_1);
+	EnablePatch(g_iAddress1, g_iOffset1, g_iOffset1_1);
 	g_bEnabled = true;
 
 	z_vomit_drag = FindConVar("z_vomit_drag");
@@ -59,8 +57,8 @@ public void OnPluginStart()
 public void OnPluginEnd()
 {
 	if (!g_bEnabled) return;
-	DisablePatch(g_iAddress, g_iOffset);
-	if (g_iAddress1) DisablePatch(g_iAddress1, g_iOffset1);
+	DisablePatch(g_iAddress, g_iOffset, g_iOffset_1);
+	DisablePatch(g_iAddress1, g_iOffset1, g_iOffset1_1);
 	z_vomit_drag.RestoreDefault();
 	z_vomit_velocity.RestoreDefault();
 }
@@ -70,20 +68,28 @@ public void OnConfigsExecuted()
 	SetConVar();
 }
 
-void EnablePatch(Address address, int offset)
+void EnablePatch(Address address, int offset, int offset1)
 {
+	if (!address || offset == -1) return;
 	StoreToAddress(address, 0xB8, NumberType_Int8);
 	StoreToAddress(address + view_as<Address>(1), 0x3D088889, NumberType_Int32);
-	StoreToAddress(address + view_as<Address>(offset + 5), 0xC06E0F66, NumberType_Int32);
-	StoreToAddress(address + view_as<Address>(offset + 9), 0x90, NumberType_Int8);
+	StoreToAddress(address + view_as<Address>(offset), 0xC06E0F66, NumberType_Int32);
+	StoreToAddress(address + view_as<Address>(offset + 4), 0x90, NumberType_Int8);
+	if (offset1 == -1) return;
+	StoreToAddress(address + view_as<Address>(offset1), 0xC06E0F66, NumberType_Int32);
+	StoreToAddress(address + view_as<Address>(offset1 + 4), 0x90, NumberType_Int8);
 }
 
-void DisablePatch(Address address, int offset)
+void DisablePatch(Address address, int offset, int offset1)
 {
+	if (!address || offset == -1) return;
 	StoreToAddress(address, 0xA1, NumberType_Int8);
 	StoreToAddress(address + view_as<Address>(1), g_iValue, NumberType_Int32);
-	StoreToAddress(address + view_as<Address>(offset + 5), 0x40100FF3, NumberType_Int32);
-	StoreToAddress(address + view_as<Address>(offset + 9), 0x10, NumberType_Int8);
+	StoreToAddress(address + view_as<Address>(offset), 0x40100FF3, NumberType_Int32);
+	StoreToAddress(address + view_as<Address>(offset + 4), 0x10, NumberType_Int8);
+	if (offset1 == -1) return;
+	StoreToAddress(address + view_as<Address>(offset1), 0x40100FF3, NumberType_Int32);
+	StoreToAddress(address + view_as<Address>(offset1 + 4), 0x10, NumberType_Int8);
 }
 
 void SetConVar()
