@@ -1,58 +1,44 @@
 "Games"
 {
-    "left4dead2"
-    {
-		"Addresses"
+	"left4dead2"
+	{
+		"Offsets"
 		{
-			"patch1"
+			"vomit_inst1"
 			{
-				"linux"
-				{
-					"signature"	"vomit_fix"
-					"offset"	"1534"
-				}
-				"windows"
-				{
-					"signature"	"vomit_fix"
-					"offset"	"886"
-				}
+				"linux"		"5"
+				"windows"	"11"
 			}
-			"patch2"
+			"vomit_inst2"
 			{
-				"windows"
-				{
-					"signature"	"vomit_fix"
-					"offset"	"1347"
-				}
+				"windows"	"74"
 			}
-			"frametime"
+			"vomit_inst3"
 			{
-				"linux"
-				{
-					"signature"	"vomit_fix"
-					"offset"	"-20"
-				}
-				"windows"
-				{
-					"signature"	"vomit_fix"
-					"offset"	"-20"
-				}
+				"windows"	"11"
+			}
+			"vomit_inst4"
+			{
+				"windows"	"70"
 			}
 		}
+
 		"Signatures"
 		{
-			"vomit_fix"
+			"vomit_fix1"
 			{
 				"library"	"server"
-				"linux"		"@_ZN6CVomit13UpdateAbilityEv"
-				"windows"	"*******************\x53\x56\x57\x8b\xf9\x8b\x87\x38\x04\x00\x00"
+				/* A1 ? ? ? ? F3 0F 10 40 10 F3 0F 59 D0 */
+				"linux"		"\xA1****\xF3\x0F\x10\x40\x10\xF3\x0F\x59\xD0"
+				/* A1 ? ? ? ? 89 ? ? 89 ? ? F3 0F 10 40 10 0F 28 C8 */
+				"windows"	"\xA1****\x89**\x89**\xF3\x0F\x10\x40\x10\x0F\x28\xC8"
 			}
-		//	"vomit_fix"
-		//	{
-		//		"library"	"server"
-		//		"linux"		"\xA1****\xF3\x0F\x10\x40\x10\xF3\x0F\x59"
-		//		"windows"	"\xA1****\x89**x89**\xF3\x0F\x10\x40\x10"
-		//	}
+			"vomit_fix2"
+			{
+				"library"	"server"
+				/* A1 ? ? ? ? 89 ? ? 89 ? ? F3 0F 10 40 10 F3 0F 59 D0 */
+				"windows"	"\xA1****\x89**\x89**\xF3\x0F\x10\x40\x10\xF3\x0F\x59\xD0"
+			}
 		}
-    }
+	}
 }
