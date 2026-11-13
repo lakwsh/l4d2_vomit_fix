@@ -14,7 +14,7 @@ public Plugin myinfo =
 }
 
 bool g_bEnabled;
-Address g_iAddress;
+Address g_iAddr;
 any g_iValue;
 
 ConVar sv_enableoldqueries;
@@ -24,16 +24,16 @@ public void OnPluginStart()
 	GameData hGameData = new GameData("l4d2_a2s_fix");
 	if (!hGameData) SetFailState("Failed to load 'l4d2_a2s_fix.txt' gamedata.");
 
-	g_iAddress = hGameData.GetMemSig("a2s_fix");
-	if (!g_iAddress) SetFailState("Failed to load 'a2s_fix' signature.");
-	g_iValue = LoadFromAddress(g_iAddress, NumberType_Int16);
+	g_iAddr = hGameData.GetMemSig("a2s_fix");
+	if (!g_iAddr) SetFailState("Failed to load 'a2s_fix' signature.");
+	g_iValue = LoadFromAddress(g_iAddr, NumberType_Int16);
 	switch (hGameData.GetOffset("type"))
 	{
 		case -1: SetFailState("Failed to load 'type' offset.");
-		case 0: StoreToAddress(g_iAddress, 0x9090, NumberType_Int16);
-		case 1: StoreToAddress(g_iAddress, 0xEB, NumberType_Int8);
-		case 2: StoreToAddress(g_iAddress, 0x04EB, NumberType_Int16);
-		case 3: StoreToAddress(g_iAddress, 0xE990, NumberType_Int16);
+		case 0: StoreToAddress(g_iAddr, 0x9090, NumberType_Int16);
+		case 1: StoreToAddress(g_iAddr, 0xEB, NumberType_Int8);
+		case 2: StoreToAddress(g_iAddr, 0x04EB, NumberType_Int16);
+		case 3: StoreToAddress(g_iAddr, 0xE990, NumberType_Int16);
 		default: SetFailState("Invalid 'type' offset.");
 	}
 	delete hGameData;
@@ -46,7 +46,7 @@ public void OnPluginStart()
 public void OnPluginEnd()
 {
 	if (!g_bEnabled) return;
-	StoreToAddress(g_iAddress, g_iValue, NumberType_Int16);
+	StoreToAddress(g_iAddr, g_iValue, NumberType_Int16);
 	sv_enableoldqueries.RestoreDefault();
 }
 

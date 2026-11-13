@@ -22,10 +22,10 @@
 			"a2s_fix"
 			{
 				"library"	"engine"
-				"linux"		"\x0F\x84\x2A\x2A\x2A\x2A\x8B\xB5\x2A\x2A\x2A\x2A\x8B\x06"
 				/* 0F 84 ? ? ? ? 8B B5 ? ? ? ? 8B 06 */
-				"windows"	"\x74\x2A\x8B\x16\x8B\x42\x2A\x8B\xCE\x33\xDB"
+				"linux"		"\x0F\x84****\x8B\xB5****\x8B\x06"
 				/* 74 ? 8B 16 8B 42 ? 8B CE 33 DB */
+				"windows"	"\x74*\x8B\x16\x8B\x42*\x8B\xCE\x33\xDB"
 			}
 		}
 	}
